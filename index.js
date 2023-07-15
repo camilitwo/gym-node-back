@@ -2,6 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const Rutina = require('./rutina.js')
+const cors = require('cors');
+
+app.use(cors());
 
 // Conectarse a MongoDB
 mongoose.connect('mongodb+srv://appgym:appgym@cluster-gym.ruujfxg.mongodb.net/test', {
