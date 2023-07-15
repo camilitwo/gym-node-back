@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const Rutina = require('./rutina.js')
 const cors = require('cors');
 
-app.use(cors());
+
 
 // Conectarse a MongoDB
 mongoose.connect('mongodb+srv://appgym:appgym@cluster-gym.ruujfxg.mongodb.net/test', {
@@ -20,8 +20,9 @@ mongoose.connect('mongodb+srv://appgym:appgym@cluster-gym.ruujfxg.mongodb.net/te
 
 // Crear la aplicación Express
 const app = express();
-
+app.use(cors());
 app.use(bodyParser.json());
+
 
 // Rutas de ejemplo
 app.get('/', (req, res) => {
