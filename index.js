@@ -38,6 +38,7 @@ app.get('/rutinas', async (req, res) => {
     res.status(500).json({ error: 'Error al obtener las rutinas' });
   }
 });
+    
 
 app.post('/rutinas', async (req, res) => {
   try {
@@ -50,6 +51,39 @@ app.post('/rutinas', async (req, res) => {
     res.status(500).json({ error: 'Error al insertar la rutina' });
   }
 });
+
+app.put('/rutinas/ejercicios/:id', async (req, res) => {
+  const exerciseId = req.params.id;
+  const newWeight = req.body.peso;
+  const updateDate = new Date();
+
+  try {
+    const rutina = await Rutina.findOneAndUpdate(
+      { 'ejercicios._id': exerciseId },
+      {
+        $set: {
+          'ejercicios.$.peso': newWeight,
+          'ejercicios.$.fechaActualizacion': updateDate
+        }
+      },
+      { new: true }
+    );
+
+    if (rutina) {
+      console.log('Peso del ejercicio actualizado exitosamente');
+      res.sendStatus(200);
+    } else {
+      console.log('Ejercicio no encontrado');
+      res.sendStatus(404);
+    }
+  } catch (error) {
+    console.error('Error al actualizar el ejercicio:', error);
+    res.sendStatus(500);
+  }
+});
+
+    
+
 
 // Iniciar el servidor
 const port = 3000;

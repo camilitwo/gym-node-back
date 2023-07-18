@@ -27,6 +27,14 @@ const rutinaSchema = new mongoose.Schema({
       explicacion: {
         type: String,
         required: true
+      },
+      peso: {
+        type: Number,
+        required: true
+      },
+      fechaActualizacion: {
+        type: Date,
+        required: false
       }
     }
   ]
